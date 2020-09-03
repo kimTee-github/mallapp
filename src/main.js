@@ -22,8 +22,9 @@ Vue.prototype.axios=axios
 
 import './assets/iconfont/iconfont.css';
 
-import { Backtop } from 'element-ui';
+import { Backtop,Form,FormItem} from 'element-ui';
 Vue.use(Backtop);
+Vue.use(Form).use(FormItem);
 
 Vue.config.productionTip = false
 

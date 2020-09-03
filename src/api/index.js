@@ -1,7 +1,8 @@
 const api = {
-  // Login: '/user/login',
-  // UserInfo: '/user/userinfo',
-  // UserName: '/user/name'
+  AddLogin: '/LoginPage/AddLogin',
+  UserPhone: '/Verify/GetPhone',
+  UserName:'/Verify/LoginName',
+  getCode: '/SMSCode/GetCode',
   getHome:'/Home/getHomeREC',
   getGoods:'/Home/getHomeShowGoods',
   getDetails:'/Goods/GetGoodsInfo'

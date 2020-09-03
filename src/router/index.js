@@ -43,13 +43,22 @@ const routes = [
   {
     path: '/mydetail',
     name: 'Details',
-    component: () => import('@/views/home/Details'),
-    // meta: { title: '我的', keepAlive: false }
+    component: () => import('@/views/home/Details')
+  },
+  {
+    path: '/detailPage',
+    name: 'detailPage',
+    component: () => import('@/views/user/detailPage')
+  },
+  {
+    path: '/Login',
+    name: 'Login',
+    component: () => import('@/views/Login/Login')
   }
 ]
 
 const router = new VueRouter({
-  mode:'hash',
+  mode: 'hash',
   routes
 })
 
