@@ -18,7 +18,7 @@
       </div>
 
       <p class="pwd">
-        <input type="checkbox" name id @click="onPwd"/>
+        <input type="checkbox" name id @click="onPwd" />
         <span>记住密码</span>
       </p>
 
@@ -33,7 +33,7 @@ import qs from "qs";
 import md5 from "js-md5";
 import { Login } from "../../api/user";
 import axios from "axios";
-import { mapState,mapGetters,mapActions,mapMutations } from "vuex";
+import { mapState, mapGetters, mapActions, mapMutations } from "vuex";
 export default {
   data() {
     return {
@@ -44,12 +44,13 @@ export default {
   },
   methods: {
     ...mapMutations({
-      setToken:'setToken'
+      setToken: "setToken",
     }),
     login() {
       let params = {
         loginName: this.loginName,
         LoginPassword: this.loginPwd,
+        isPassing: "yes",
       };
       params.LoginPassword = md5(params.LoginPassword);
       axios
@@ -58,16 +59,15 @@ export default {
           qs.stringify(params)
         )
         .then((res) => {
-          console.log(res);
+          // console.log(res.data.tnToken.tokenStr);
+
           this.setToken(res.data.tnToken.tokenStr);
           setTimeout(() => {
             this.$router.push({ path: "/home" });
           }, 1000);
         });
     },
-    onPwd(){
-      
-    }
+    onPwd() {},
   },
 };
 </script>

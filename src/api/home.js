@@ -24,6 +24,25 @@ export function getDetails(params) {
   return request({
     url: api.getDetails,
     method: 'get',
-    params
+    params,
+    hideloading: true
+  })
+}
+// 添加购物车
+export function getAdd(params) {
+  return request({
+    url: api.getAdd,
+    method: 'post',
+    params,
+    hideloading: true
+  })
+}
+// 购物车信息
+export function getCart(params) {
+  return request({
+    url: api.getCart,
+    method: 'get',
+    params,
+    hideloading: true
   })
 }

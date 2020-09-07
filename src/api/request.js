@@ -1,5 +1,5 @@
 import axios from 'axios'
-import store from '@/store'
+import store from '@/store/index'
 import { Toast } from 'vant'
 // 根据环境不同引入不同api地址
 // import { baseApi } from '@/config'
@@ -19,10 +19,11 @@ service.interceptors.request.use(
       // loading
       Toast.loading({
         forbidClick: true
-      })
+      })                
     }
-    if (store.getters.token) {
-      config.headers['X-Token'] = ''
+    if (store.state.token) {
+      config.headers.token = store.state.token
+      
     }
     return config
   },
