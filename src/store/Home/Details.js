@@ -5,11 +5,11 @@ import { getDetails, getAdd, getCart } from '../../api/home'
 const Goods = {
   state: {
     data: [],
-    goods: [],
+    goods: {},
     services: [],
     comments: [],
     comm: [],
-    shopInfo: [],
+    shopInfo: {},
     cart: [],
     cartlist: [],
     num: 1
@@ -17,17 +17,16 @@ const Goods = {
   mutations: {
     getDetails(state, item) {
       state.data = [...item]
-      state.goods = [...item][0]
+      state.goods = { ...item }[0]
       state.services = [...item][2]
       state.comments = []
       state.comm = [...item][3]
-      state.shopInfo = [...item][1]
+      state.shopInfo = { ...item }[1]
       state.comm.forEach(ele => {
         if (ele != null) {
           state.comments.push(ele)
         }
       })
-      console.log(item);
     },
     getAdd(state, item) {
       state.cart.forEach(ele => {
@@ -50,6 +49,7 @@ const Goods = {
   actions: {
     getDetails(context, id) {
       getDetails({ goodsId: id }).then(res => {
+        // console.log(res);
         context.commit('getDetails', res.data)
       })
     },
@@ -57,15 +57,15 @@ const Goods = {
       getAdd({ product_id: item.id, product_amount: item.num }).then(res => {
         console.log(res);
         context.commit('getAdd', item)
-      }).catch(error=>{
-        console.log(error);
+      }).catch(error => {
+        console.log(error); 
       })
     },
     getCart(context) {
       getCart({ page: 1, pageSize: 20 }).then(res => {
         // console.log(res.data);
         context.commit('getCart', res.data)
-      }).catch(error=>{
+      }).catch(error => {
         console.log(error);
       })
     }

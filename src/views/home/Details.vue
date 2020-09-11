@@ -8,7 +8,7 @@
       <ul>
         <li @click="onContainer">商品</li>
         <li @click="onComments">评论</li>
-        <li @click="onParameter" >参数</li>
+        <li @click="onParameter">参数</li>
         <li @click="onRecommendlist">推荐</li>
       </ul>
     </div>
@@ -66,6 +66,7 @@
         </div>
       </div>
 
+      <!-- 参数 -->
       <div class="parameter" ref="parameter">
         <!-- 店铺 -->
         <div class="shopInfo">
@@ -125,8 +126,47 @@
         </div>
       </div>
       <p class="addcart" @click="add(goods.goodsId)">加入购物车</p>
-      <p class="buy" @click="onClick(goods)">购买</p>
+      <p class="buy" @click="onClick">购买</p>
     </div>
+
+    <van-popup v-model="show" position="bottom" :style="{ height: '50%' }" closeable>
+      <div class="popup">
+        <div class="popup_goods">
+          <img :src="goods.goodsLogo" alt />
+          <div class="popup_goods_item">
+            <p class="popup_goods_price">￥{{goods.goodsPrice}}</p>
+            <p>剩余{{goods.num}}</p>
+            <p>选择颜色</p>
+          </div>
+        </div>
+        <div class="popup_style">
+          <p class="popup_color">颜色</p>
+          <p class="popup_btn">
+            <van-button type="default" size="mini" :class="{}" @click="on(index)">
+              <img :src="goods.goodsLogo" width="30px" height="30px" />
+              <span>默认</span>
+            </van-button>
+            <van-button type="default" size="mini" disabled>
+              <img src="https://img.yzcdn.cn/2.jpg" width="30px" height="30px" />
+              <span>蓝色</span>
+            </van-button>
+          </p>
+        </div>
+        <p class="popup_num">
+          <span>购买数量</span>
+          <span class="popup_num_item">
+            <span class="popup_num_color">(限购10件)</span>
+            <span>
+              <van-stepper v-model="num" />
+            </span>
+          </span>
+        </p>
+        <van-goods-action>
+          <van-goods-action-button type="warning" text="加入购物车" @click="add(goods.goodsId)" />
+          <van-goods-action-button type="danger" text="立即购买" @click="onBuy(goods.goodsId,num)" />
+        </van-goods-action>
+      </div>
+    </van-popup>
   </div>
 </template>
 <script>
@@ -135,7 +175,8 @@ export default {
     return {
       details: [],
       logo: "",
-      num:1
+      num: 1,
+      show: false,
     };
   },
   computed: {
@@ -160,10 +201,10 @@ export default {
     this.$store.dispatch("getDetails", id);
   },
   methods: {
-    add(id){ 
+    add(id) {
       console.log(id);
-      this.$store.dispatch('getAdd',{id,num:this.num})
-      this.$store.dispatch('getCart')
+      this.$store.dispatch("getAdd", { id, num: this.num });
+      this.$store.dispatch("getCart");
     },
     back() {
       window.history.back();
@@ -179,6 +220,22 @@ export default {
     },
     onRecommendlist() {
       this.$refs.recommendlist.scrollIntoView({ behavior: "smooth" });
+    },
+    onClick() {
+      this.show = true;
+    },
+    on(index) {
+      console.log(index);
+    },
+    onBuy(id,num) {
+      console.log(num);
+      this.$router.push({
+        path: "/order",
+        query: {
+          id,
+          num
+        },
+      });
     },
   },
 };
@@ -208,6 +265,7 @@ export default {
     align-items: center;
   }
 }
+
 // 商品
 .container {
   width: 100%;
@@ -366,6 +424,7 @@ export default {
     width: 100%;
   }
 }
+
 // 评论
 .comments {
   width: 100%;
@@ -418,6 +477,7 @@ export default {
     }
   }
 }
+
 // 推荐
 .recommendlist {
   width: 100%;
@@ -505,6 +565,89 @@ export default {
     color: #fff;
     font-size: 34px;
     background: #ff6699;
+  }
+}
+
+// 遮罩层
+.van-popup {
+  width: 100%;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  .popup {
+    width: 92%;
+    height: 90%;
+    margin: auto;
+    .popup_goods {
+      width: 100%;
+      height: 200px;
+      margin-top: 40px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      img {
+        width: 200px;
+        height: 200px;
+      }
+      .popup_goods_item {
+        margin-left: 30px;
+        color: #969799;
+        font-size: 25px;
+        .popup_goods_price {
+          font-size: 38px;
+          font-weight: 600;
+          color: #f23f53;
+          margin-bottom: 20px;
+        }
+        p {
+          margin: 10px 0px;
+        }
+      }
+    }
+    .popup_style {
+      width: 100%;
+      height: 150px;
+      font-size: 32px;
+      .popup_color {
+        margin: 20px 0px 10px 0px;
+      }
+      .popup_btn {
+        margin: 15px 0px 10px 0px;
+        padding: 0px;
+        .van-button {
+          width: 150px;
+          height: 70px;
+          color: #000;
+          font-size: 28px;
+          vertical-align: middle;
+          background: #f7f8fa;
+          margin-right: 50px;
+          border: none;
+          img {
+            vertical-align: middle;
+          }
+          span {
+            vertical-align: middle;
+            padding-left: 7px;
+          }
+        }
+      }
+    }
+    .popup_num {
+      width: 100%;
+      height: 100px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 32px;
+      .popup_num_item {
+        display: flex;
+        align-items: center;
+        font-size: 28px;
+        .popup_num_color {
+          color: #f23f53;
+        }
+      }
+    }
   }
 }
 </style>

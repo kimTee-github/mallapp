@@ -5,7 +5,7 @@
         <div class="logo">
           <img :src="logo" />
         </div>
-        <van-search v-model="value" placeholder="请输入搜索关键词" />
+        <van-search placeholder="请输入搜索关键词" @click="toSearch"/>
       </div>
       <Banner :banner="banner"></Banner>
       <Grid :grid="grid"></Grid>
@@ -61,7 +61,6 @@ export default {
   data() {
     return {
       logo: require("../../assets/img/logo.png"),
-      value: "",
       loading: false,
       finished: false,
       error: false,
@@ -148,7 +147,12 @@ export default {
         },
       });
     },
-  },
+    toSearch(){
+      this.$router.push({
+        path:'/search'
+      })
+    }
+ },
 };
 </script>
 <style scoped>

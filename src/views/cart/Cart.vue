@@ -56,14 +56,12 @@ export default {
     console.log(this.cart);
   },
   methods: {
-    onCheck(item){
+    onCheck(item) {
       console.log(item);
     },
-    onSubmit(cart){
+    onSubmit(cart) {
       console.log(cart);
-      
-      
-    }
+    },
   },
 };
 </script>

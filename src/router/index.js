@@ -40,20 +40,45 @@ const routes = [
 
     ]
   },
-  {
+  {    //搜索
+    path: '/search',
+    name: 'Search',
+    component: () => import('@/views/Search/Search')
+  },
+  {    //商品详情页
     path: '/mydetail',
     name: 'Details',
     component: () => import('@/views/home/Details')
   },
-  {
+  {   //用户详情页
     path: '/detailPage',
     name: 'detailPage',
     component: () => import('@/views/user/detailPage')
   },
-  {
+  {  //登录主页
     path: '/Login',
     name: 'Login',
     component: () => import('@/views/Login/Login')
+  },
+  {  //订单页
+    path: '/order',
+    name: 'Order',
+    component: () => import('@/views/Order/Order')
+  },
+  {  //地址页
+    path: '/address',
+    name: 'Address',
+    component: () => import('@/views/Order/Address'),
+  },
+  {  //地址添加页
+    path: '/area',
+    name: 'Area',
+    component: () => import('@/views/Order/Area')
+  },
+  {  //支付页
+    path: '/pay',
+    name: 'Pay',
+    component: () => import('@/views/Order/Pay')
   }
 ]
 

@@ -1,6 +1,6 @@
 // 按需全局引入 vant组件
 import Vue from 'vue'
-import { SubmitBar, Stepper, Checkbox, CheckboxGroup, Card, SwipeCell, Tab, Tabs, Search, Sticky, Button, List, Cell, Tabbar, TabbarItem, Swipe, SwipeItem, NavBar, Grid, GridItem, Icon } from 'vant'
+import { PasswordInput, NumberKeyboard,Area,AddressEdit, AddressList,GoodsAction, GoodsActionIcon, GoodsActionButton,Popup, SubmitBar, Stepper, Checkbox, CheckboxGroup, Card, SwipeCell, Tab, Tabs, Search, Sticky, Button, List, Cell, Tabbar, TabbarItem, Swipe, SwipeItem, NavBar, Grid, GridItem, Icon } from 'vant'
 Vue.use(Button)
 Vue.use(Cell)
 Vue.use(List)
@@ -18,3 +18,12 @@ Vue.use(Checkbox);
 Vue.use(CheckboxGroup);
 Vue.use(Stepper);
 Vue.use(SubmitBar);
+Vue.use(Popup);
+Vue.use(GoodsAction);
+Vue.use(GoodsActionButton);
+Vue.use(GoodsActionIcon);
+Vue.use(AddressList);
+Vue.use(AddressEdit);
+Vue.use(Area);
+Vue.use(PasswordInput);
+Vue.use(NumberKeyboard);

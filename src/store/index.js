@@ -6,6 +6,8 @@ import Banner from './Home/Banner'
 import Grid from './Home/Grid'
 import Goods from './Home/Goods'
 import Details from './Home/Details'
+import Order from './Home/Order'
+import Search from './Home/Search'
 import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
@@ -34,7 +36,9 @@ const store = new Vuex.Store({
     Grid,
     Goods,
     Details,
-    getters
+    getters,
+    Order,
+    Search
   },
 
 })
