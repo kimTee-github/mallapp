@@ -5,7 +5,7 @@
         <div class="logo">
           <img :src="logo" />
         </div>
-        <van-search placeholder="请输入搜索关键词" @click="toSearch"/>
+        <van-search placeholder="请输入搜索关键词" @click="toSearch" />
       </div>
       <Banner :banner="banner"></Banner>
       <Grid :grid="grid"></Grid>
@@ -49,7 +49,6 @@
           </div>
         </el-backtop>
       </div>
-      
     </div>
   </div>
 </template>
@@ -57,6 +56,7 @@
 import Banner from "../../components/content/Banner";
 import Grid from "../../components/content/Grid";
 import { getGoods } from "../../api/home";
+import { debounce } from "../../utils/debounce";
 export default {
   data() {
     return {
@@ -101,7 +101,7 @@ export default {
         page: this.page,
         type: this.type[this.defaultIndex].type,
       });
-      // console.log(res.data);
+      console.log(res.data);
 
       if (res.data === 0) {
         // 判断获取数据条数若等于0
@@ -147,12 +147,12 @@ export default {
         },
       });
     },
-    toSearch(){
+    toSearch() {
       this.$router.push({
-        path:'/search'
-      })
-    }
- },
+        path: "/search",
+      });
+    },
+  },
 };
 </script>
 <style scoped>

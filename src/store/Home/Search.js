@@ -29,7 +29,8 @@ const Search = {
         },
         DelHistory(state, index) {
             state.history.splice(index, 1)
-        }
+        },
+        
     },
     actions: {
         // 搜索

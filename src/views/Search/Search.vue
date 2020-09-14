@@ -2,7 +2,7 @@
   <div>
     <van-nav-bar title="商品搜索">
       <template #left>
-        <van-icon name="arrow-left" size="24" @click="back"/>
+        <van-icon name="arrow-left" size="24" @click="back" />
       </template>
     </van-nav-bar>
 
@@ -36,7 +36,7 @@
         <div>
           <div v-for="(item,index) in history" :key="index">
             <div class="history_item">
-              <p>{{item}}</p>
+              <p @click="to(item)">{{item}}</p>
               <p>
                 <van-icon name="cross" @click="del(index)" />
               </p>
@@ -77,6 +77,7 @@
   </div>
 </template>
 <script>
+import { throttle } from "../../utils/debounce";
 export default {
   data() {
     return {
@@ -101,13 +102,20 @@ export default {
   created() {
     //搜索热词
     this.$store.dispatch("getSearchHot");
+
+    if ((this.value = "")) {
+      this.isShow = true;
+      this.show = false;
+    }
   },
   methods: {
     onSearch() {
-      this.isShow = false;
-      this.show = true;
-      this.$store.dispatch("getSearch", this.value);
-      this.$store.dispatch("getHistory", this.value);
+      throttle((ele) => {
+        this.isShow = false;
+        this.show = true;
+        this.$store.dispatch("getSearch", this.value);
+        this.$store.dispatch("getHistory", this.value);
+      }, 3000);
     },
     del(index) {
       this.$store.dispatch("DelHistory", index);
@@ -119,9 +127,9 @@ export default {
       this.$store.dispatch("getSearch", this.value);
       this.$store.dispatch("getHistory", this.value);
     },
-    back(){
-        window.history.back()
-    }
+    back() {
+      window.history.back();
+    },
   },
 };
 </script>
